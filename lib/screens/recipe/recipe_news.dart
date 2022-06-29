@@ -3,22 +3,29 @@ import 'package:flutterspotifynav2/main.dart';
 import 'package:flutterspotifynav2/screens/kochbuch/kochbuch.dart';
 import 'package:flutterspotifynav2/screens/kochbuch/kochbuch_deep.dart';
 import 'package:flutterspotifynav2/screens/recipe_fullscreen.dart';
+import 'package:flutterspotifynav2/services/navigationservice.dart';
 
 class RecipeNewsScreen extends StatelessWidget {
   const RecipeNewsScreen();
 
   void _navigateBack(BuildContext ctx) {
-    Navigator.pop(ctx);
+    NavigationService().goBackRecipe(ctx);
   }
 
   void _navigateToFullscreenPage(BuildContext ctx) {
-    appNavigatorKey.currentState?.push(
-        MaterialPageRoute(builder: (ctx) => const RecipeFullscreenScreen()));
+    NavigationService()
+        .navigateToAppScreen(ctx, const RecipeFullscreenScreen());
   }
 
   void _navigateToKochbuchPage(BuildContext ctx) {
-    kochbuchNavigatorKey.currentState
-        ?.push(MaterialPageRoute(builder: (ctx) => const KochbuchDeepScreen()));
+    NavigationService().setCurrentTabIdStream(1);
+
+    Future.delayed(
+        const Duration(milliseconds: 1),
+        () => {
+              NavigationService()
+                  .navigateToKochbuchScreen(ctx, const KochbuchDeepScreen()),
+            });
   }
 
   @override

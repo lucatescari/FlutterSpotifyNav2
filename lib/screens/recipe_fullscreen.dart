@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutterspotifynav2/services/navigationservice.dart';
 
 class RecipeFullscreenScreen extends StatelessWidget {
   const RecipeFullscreenScreen();
 
   void _navigateBack(BuildContext ctx) {
-    Navigator.pop(ctx);
+    NavigationService().goBackApp(ctx);
   }
 
   @override
